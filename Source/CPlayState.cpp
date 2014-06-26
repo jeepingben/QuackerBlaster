@@ -72,24 +72,24 @@ void CPlayState::init()
     if(g_Random.random(1, 100) < 50)
     {
         // set duck's inital x velocity
-        g_Duck.velocity().setX(1.1);
+        g_Duck.velocity().setX(3.1);
     }
     else
     {
         // set duck's inital x velocity
-        g_Duck.velocity().setX(-1.1);
+        g_Duck.velocity().setX(-3.1);
     }
 
     // create instance of the random generator
     if(g_Random.random(1, 100) < 50)
     {
         // set duck's inital y velocity
-        g_Duck.velocity().setY(1.1);
+        g_Duck.velocity().setY(3.1);
     }
     else
     {
         // set duck's inital y velocity
-        g_Duck.velocity().setY(-1.1);
+        g_Duck.velocity().setY(-3.1);
     }
 
     for(int i=0; i < 11; i++)
@@ -253,6 +253,7 @@ void CPlayState::processEvents(CGameEngine* const game)
             m_MouseListener.pollMouse(event);
 
         // if the left mouse button was pressed this frame
+            // set the crosshair's position to the mouse's cursor^M                                                              
         if(m_MouseListener.isClicked())
         {
             if(m_MouseListener.isLeftButtonDown())
@@ -282,7 +283,7 @@ void CPlayState::processEvents(CGameEngine* const game)
                             g_Duck.velocity().setX(0);
 
                             // and the duck's y velocity to 1
-                            g_Duck.velocity().setY(1);
+                            g_Duck.velocity().setY(12);
 
                             //calculate the score increment based on the round
                             int round = g_Round.getCounterValue();
@@ -328,6 +329,7 @@ void CPlayState::update(CGameEngine* const game)
     // get pointer to screen surface
     screen = SDL_GetVideoSurface();
 
+    m_MouseListener.getGyroPosition();
     // if the duck escape timer has expired
     if(g_DuckEscapeTimer.getTicks() >= 5.0 - (g_Round.getCounterValue() * .10) && g_DuckEscapeTimer.isRunning())
     {
@@ -342,7 +344,7 @@ void CPlayState::update(CGameEngine* const game)
     }
 
     // if the progress timer has expired
-    if(g_ProgressTimer.getTicks() >= 3.0 && !g_DuckEscapeTimer.isRunning())
+    if(g_ProgressTimer.getTicks() >= 1.0 && !g_DuckEscapeTimer.isRunning())
     {
         g_ProgressTimer.stop();
 
@@ -350,22 +352,22 @@ void CPlayState::update(CGameEngine* const game)
         g_Duck.position().setX(64);
 
         // set the ducks y position
-        g_Duck.position().setY(screen->h - (g_Duck.getHeight() * 3));
+        g_Duck.position().setY(screen->h - (g_Duck.getHeight() * 5));
 
         // create instance of the random generator
         if(g_Random.random(1, 100) < 50)
         {
             // set duck's inital x velocity
-            g_Duck.velocity().setX(1.0 + g_Round.getCounterValue() * 0.1);
+            g_Duck.velocity().setX(4.5 + g_Round.getCounterValue() * 0.3);
         }
         else
         {
             // set duck's inital y velocity
-            g_Duck.velocity().setX(-(1.0 + g_Round.getCounterValue() * 0.1));
+            g_Duck.velocity().setX(-(4.5 + g_Round.getCounterValue() * 0.3));
         }
 
         // set the ducks y velocity
-        g_Duck.velocity().setY(-(1.0 + g_Round.getCounterValue() * 0.1));
+        g_Duck.velocity().setY(-(4.5 + g_Round.getCounterValue() * 0.3));
 
         // set the duck alive status to true
         g_Duck.setAlive(true);

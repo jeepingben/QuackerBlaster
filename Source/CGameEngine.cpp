@@ -77,7 +77,7 @@ void CGameEngine::destroy()
     // switch back to windowed modeso other programs won't get accidentally resized
     if(m_fullscreen)
     {
-        m_Screen = SDL_SetVideoMode(640, 480, 0, 0);
+        m_Screen = SDL_SetVideoMode(480, 640, 0, 0);
     }
 
     // if the mouse cursor was hidden show it

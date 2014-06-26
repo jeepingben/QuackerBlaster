@@ -25,7 +25,7 @@
 #include "CErrorLogger.h"
 #include "CImageEntity.h"
 #include "CSprite.h"
-#include "CMouseListener.h"
+#include "CGyroListener.h"
 #include "CText.h"
 #include "CTextCounter.h"
 #include "CTimer.h"
@@ -39,7 +39,7 @@ class CPlayState : public CGameState {
 
     private:
         CErrorLogger log;
-        CMouseListener m_MouseListener;
+        CGyroListener m_MouseListener;
         CTimer g_DuckEscapeTimer;
         CTimer g_ProgressTimer;
         CRandom g_Random;
