@@ -38,7 +38,7 @@ class CGameEngine {
     public:
         SDL_Surface* m_Screen;
 
-        void init(const char* title, int const width=1024, int const height=768, int const bpp=0, bool const fullscreen=0, bool hidemouse=true);
+        void init(const char* title, int const width=480, int const height=600, int const bpp=0, bool const fullscreen=0, bool hidemouse=true);
         void destroy();
 
         void changeState(CGameState* const state);

@@ -17,7 +17,8 @@
 
 // include required libraries
 #include "QuackerBlaster.h"
-
+#include "SDL.h"
+#include "CTimer.h"
 int main(int argc, char* args[])
 {
     //create instance of CGameEngine
@@ -50,11 +51,21 @@ int main(int argc, char* args[])
     }
 
     // main loop
+    CTimer fps;
+    fps.start();
+    const int FRAMES_PER_SECOND = 30;
     while(game.running())
     {
         game.processEvents();
         game.update();
         game.draw();
+        if( ( fps.getTicks() < 1000 / FRAMES_PER_SECOND ) ) 
+        { 
+            //Sleep the remaining frame time 
+            SDL_Delay( ( 1000 / FRAMES_PER_SECOND ) - fps.getTicks() ); 
+            fps.reset();
+        }
+
     }
 
     // cleanup the engine
